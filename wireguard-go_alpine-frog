@@ -11,9 +11,6 @@ apk update
 apk upgrade
 apk add alpine-sdk musl-dev build-base libmnl-dev make wireguard-tools  git iptables  libqrencode libqrencode-dev xz 
 
-#rc-status resolvconf stop
-#rc-status resolvconf disable
-#mv /etc/resolv.back /etc/resolv.conf
 
 
 
@@ -66,14 +63,7 @@ curl -s -d "mode=wireguard-server&srv=$srv&privkey=$privkey&pubkey=$clipubkey" h
 echo -e "\n\n==============\n\nKonfiguracja klienta:\n\n"
 curl -s -d "mode=wireguard-client&srv=$srv&privkey=$cliprivkey&pubkey=$pubkey" https://mikr.us/generator.php | tee /etc/wireguard/wg-client1.conf
 
-#systemctl stop "wg-quick@wg0"
-#sed -i '/RETRIES=infinity/{n;s/.*/Environment=WG_I_PREFER_BUGGY_USERSPACE_TO_POLISHED_KMOD=1/}' /lib/systemd/system/wg-quick@.service
-#systemctl daemon-reload
-#echo "export WG_I_PREFER_BUGGY_USERSPACE_TO_POLISHED_KMOD=1" >> ~/.profile
-#echo "export WG_I_PREFER_BUGGY_USERSPACE_TO_POLISHED_KMOD=1" >> ~/.bashrc
-#systemctl start "wg-quick@wg0"
 
-#libqrencode -t ansiutf8 </etc/wireguard/wg-client1.conf
 
 rm -rf /tmp/wireguard-tools
 rm -rf /tmp/wireguard-go
